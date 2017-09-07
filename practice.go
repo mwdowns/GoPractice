@@ -7,12 +7,17 @@ const something2 = "world"
 
 func main()  {
     
-    message1 := message{greeting: "hello", person: "cleveland"}
+    data := message{"hello", "cleveland"}
+    message1 := printMessage(data.greeting, data.name)
+    fmt.Println(message1)
     
-    fmt.Println(message1.greeting, message1.person + "!")
 }
 
 type message struct {
     greeting string
-    person string
+    name string
+}
+
+func printMessage(var1 string, var2 string) string {
+    return var1 + " " + var2 + "!"
 }
