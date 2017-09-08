@@ -30,8 +30,8 @@ func main()  {
 type cityInfo struct {
     greeting string
     name string
-    wins float64
-    gamesPlayed float64
+    wins float32
+    gamesPlayed float32
 }
 
 func printMessage(var1 string, var2 string) string {
@@ -39,8 +39,8 @@ func printMessage(var1 string, var2 string) string {
 }
 
 func recordInfo(city cityInfo) (message2 string) {
-    var winPer float64 = city.wins / city.gamesPlayed
-    var per = strconv.FormatFloat(winPer, 'f', 4, 64)
+    winPer := city.wins / city.gamesPlayed
+    var per = strconv.FormatFloat(float64(winPer), 'f', 3, 32)
     return "the " + city.name + " football team had a " + per + " winning percentage last year."
 }
 
@@ -50,7 +50,5 @@ func helloCity(cities ...cityInfo) {
         fmt.Println(message)
         message2 := recordInfo(city)
         fmt.Println(message2)
-    //     winPer,cityName := recordInfo(city)
-    //     fmt.Printf("the %v football team had a %v winning percentage last year.\n", cityName, winPer)
     }
 }
