@@ -1,7 +1,9 @@
 package main
 
-import "fmt"
-
+import (
+    "fmt"
+    "strconv"
+)
 var something string = "hello"
 const something2 = "world"
 
@@ -11,16 +13,16 @@ func main()  {
     // message1 := printMessage(data.greeting, data.name)
     // fmt.Println(message1)
     
-    // winPer,city := newFunction(2, 16, data)
+    // winPer,city := recordInfo(2, 16, data)
     // fmt.Printf("the %v football team had a %v winning percentage last year.\n", city, winPer)
     
     city1 := cityInfo{"hello", "cleveland", 2, 16}
     city2 := cityInfo{"good morning", "atlanta", 15, 19}
     city3 := cityInfo{"fuck off", "boston", 16, 19}
     
-    helloCity(city1.name, city2.name, city3.name)
+    helloCity(city1, city2, city3)
     fmt.Println("\n")
-    cities :=[]string { city1.name, city2.name, city3.name }
+    cities :=[]cityInfo { city1, city2, city3 }
     helloCity(cities...)
     
 }
@@ -28,23 +30,27 @@ func main()  {
 type cityInfo struct {
     greeting string
     name string
-    wins float32
-    gamesPlayed float32
+    wins float64
+    gamesPlayed float64
 }
 
 func printMessage(var1 string, var2 string) string {
     return var1 + " " + var2 + "!"
 }
 
-func newFunction(city cityInfo) (winPer float32, cityName string) {
-    cityName = city.name
-    winPer = city.wins / city.gamesPlayed
-    return
+func recordInfo(city cityInfo) (message2 string) {
+    var winPer float64 = city.wins / city.gamesPlayed
+    var per = strconv.FormatFloat(winPer, 'f', 4, 64)
+    return "the " + city.name + " football team had a " + per + " winning percentage last year."
 }
 
-func helloCity(cities ...string) {
+func helloCity(cities ...cityInfo) {
     for _,city := range cities {
-        message := printMessage("hello", city)
+        message := printMessage(city.greeting, city.name)
         fmt.Println(message)
+        message2 := recordInfo(city)
+        fmt.Println(message2)
+    //     winPer,cityName := recordInfo(city)
+    //     fmt.Printf("the %v football team had a %v winning percentage last year.\n", cityName, winPer)
     }
 }
