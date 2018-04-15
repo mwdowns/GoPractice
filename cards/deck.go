@@ -25,8 +25,12 @@ func newDeck() deck {
 	return cards
 }
 
+func deal(d deck, handSize int) (deck, deck) {
+	return d[:handSize], d[handSize:]
+}
+
 func (d deck) cardPrint() {
-	for _, card := range d {
-		fmt.Println(card)
+	for index, card := range d {
+		fmt.Println(index, card)
 	}
 }
