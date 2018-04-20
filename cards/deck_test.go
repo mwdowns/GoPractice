@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"testing"
 )
 
@@ -49,4 +50,19 @@ func TestDeal(t *testing.T) {
 		t.Errorf("Expected remainingDeck to be 47, got %v", len(remainingDeck))
 	}
 	fmt.Println("Remaining deck len test passed")
+}
+
+func TestSaveToDeckAndNewDeckFromFile(t *testing.T) {
+	os.Remove("_decktesting")
+
+	d := newDeck()
+	d.saveToFile("_decktesting")
+
+	loadedDeck := newDeckFromFile("_decktesting")
+
+	if len(loadedDeck) != 52 {
+		t.Errorf("Expected deck of len 52, got %v", len(loadedDeck))
+	}
+	fmt.Println("Passed save deck to file and load deck from file test")
+	os.Remove("_decktesting")
 }
