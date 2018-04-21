@@ -5,6 +5,6 @@ func main() {
 	// cards.saveToFile("my_cards")
 
 	cards := newDeck()
-	cards.shuffle()
+	// cards.shuffle()
 	cards.cardPrint()
 }
