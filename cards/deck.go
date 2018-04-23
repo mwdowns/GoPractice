@@ -2,6 +2,11 @@ package main
 
 import (
 	"fmt"
+	// "io/ioutil"
+	// "math/rand"
+	// "os"
+	// "strings"
+	// "time"
 )
 
 type card struct {
@@ -11,6 +16,8 @@ type card struct {
 }
 
 type deck []card
+
+// type deck[]string
 
 func newDeck() deck {
 	cards := deck{}
