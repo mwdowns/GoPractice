@@ -4,9 +4,6 @@ import (
 	"fmt"
 )
 
-// create a new type of deck
-// which is a slice of strings
-
 type card struct {
 	name  string
 	suit  string
@@ -22,7 +19,7 @@ func newDeck() deck {
 
 	for _, suit := range cardSuits {
 		for _, value := range cardValues {
-			cards = append(cards, card{value + " of " + suit, suit, value})
+			cards = append(cards, card{name: value + " of " + suit, suit: suit, value: value})
 		}
 	}
 	return cards
@@ -33,8 +30,8 @@ func deal(d deck, handSize int) (deck, deck) {
 }
 
 func (d deck) cardPrint() {
-	for index, card := range d {
-		fmt.Println(index, card.name)
+	for _, card := range d {
+		fmt.Println(card.name)
 	}
 }
 
