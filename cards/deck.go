@@ -20,7 +20,7 @@ type deck []card
 // type deck[]string
 
 func newDeck() deck {
-	cards := deck{}
+	var cards deck
 	cardSuits := []string{"Hearts", "Spades", "Diamonds", "Clubs"}
 	cardValues := []string{"Ace", "King", "Queen", "Jack", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"}
 
