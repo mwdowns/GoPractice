@@ -76,9 +76,13 @@ func inventoryRandomizer(num int) inventory {
 		source := rand.NewSource(time.Now().UnixNano())
 		r := rand.New(source)
 		object := Objects[r.Intn(len(Objects)-1)]
+		r = rand.New(source)
 		adj := Adjectives[r.Intn(len(Adjectives)-1)]
+		r = rand.New(source)
 		attr := Attributes[r.Intn(len(Attributes)-1)]
+		r = rand.New(source)
 		itemName := object + " of " + adj + " " + attr
+		r = rand.New(source)
 		itemType := r.Intn(100)
 		if itemType == 1 {
 			itemName = object + "of Ultimate " + attr
