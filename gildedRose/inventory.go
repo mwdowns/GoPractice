@@ -62,17 +62,11 @@ func (i item) printItem() {
 }
 
 func inventoryRandomizer(num int) inventory {
-	fmt.Println(num)
 	randomInventory := inventory{}
 	Objects := []string{"Sword", "Potion", "Salve", "Sheild", "Gauntlets", "Boots"}
 	Adjectives := []string{"Awesome", "Good", "Excellent", "Bodacious", "OK", "Fine"}
 	Attributes := []string{"Speed", "Power", "Luck", "Healing", "Invisibility", "Stone", "Fire"}
-	fmt.Println(num)
-	fmt.Println(randomInventory)
 	for i := 0; i < num; i++ {
-		fmt.Println(num)
-		fmt.Println(i)
-		fmt.Println(randomInventory)
 		source := rand.NewSource(time.Now().UnixNano())
 		r := rand.New(source)
 		object := Objects[r.Intn(len(Objects)-1)]
@@ -85,23 +79,18 @@ func inventoryRandomizer(num int) inventory {
 		r = rand.New(source)
 		itemType := r.Intn(100)
 		if itemType == 1 {
-			itemName = object + "of Ultimate " + attr
+			itemName = object + " of Ultimate " + attr
 			randomInventory.EpicItems = append(randomInventory.EpicItems, item{Name: itemName, SellBy: 10, Quality: 80})
-		}
-		if itemType < 5 {
+		} else if itemType < 5 {
 			itemName = itemName + " and Increasing Quality"
 			randomInventory.SpecialItems = append(randomInventory.SpecialItems, item{Name: itemName, SellBy: 10, Quality: 5})
-		}
-		if itemType <= 20 {
+		} else if itemType <= 20 {
 			itemName = "Conjured " + itemName
 			randomInventory.ConjuredItems = append(randomInventory.ConjuredItems, item{Name: itemName, SellBy: 10, Quality: 20})
-		}
-		if itemType > 20 {
+		} else {
 			itemName = object + " of Somewhat " + adj + " " + attr
 			randomInventory.NormalItems = append(randomInventory.NormalItems, item{Name: itemName, SellBy: 10, Quality: 10})
 		}
 	}
-	fmt.Println(len(randomInventory.NormalItems) + len(randomInventory.EpicItems) + len(randomInventory.SpecialItems) + len(randomInventory.ConjuredItems))
-	fmt.Println(randomInventory)
 	return randomInventory
 }
