@@ -21,3 +21,12 @@ func TestNewInventory(t *testing.T) {
 	}
 	fmt.Println("Test for newInventory function passed")
 }
+
+func TestInventoryRandomizer(t *testing.T) {
+	i := inventoryRandomizer(15)
+	itemCount := len(i.EpicItems) + len(i.SpecialItems) + len(i.ConjuredItems) + len(i.NormalItems)
+	if itemCount != 15 {
+		t.Errorf("Expected 15 items in inventory, but got %v", itemCount)
+	}
+	fmt.Println("Test for inventoryRandomizer function passed")
+}

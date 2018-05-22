@@ -50,18 +50,29 @@ func (i inventory) printInventory() {
 	}
 }
 
+func (i inventory) countInventory() {
+	ic := len(i.EpicItems) + len(i.SpecialItems) + len(i.ConjuredItems) + len(i.NormalItems)
+	fmt.Printf("There are %v items in the shop!\n", ic)
+}
+
 func (i item) printItem() {
 	fmt.Printf("Name: %v\n", i.Name)
 	fmt.Printf("Sell in %v days.\n", i.SellBy)
 	fmt.Printf("Quality: %v\n", i.Quality)
 }
 
-func inventoryRandomizer(seed int) inventory {
+func inventoryRandomizer(num int) inventory {
+	fmt.Println(num)
 	randomInventory := inventory{}
 	Objects := []string{"Sword", "Potion", "Salve", "Sheild", "Gauntlets", "Boots"}
 	Adjectives := []string{"Awesome", "Good", "Excellent", "Bodacious", "OK", "Fine"}
 	Attributes := []string{"Speed", "Power", "Luck", "Healing", "Invisibility", "Stone", "Fire"}
-	for i := 0; i < seed; i++ {
+	fmt.Println(num)
+	fmt.Println(randomInventory)
+	for i := 0; i < num; i++ {
+		fmt.Println(num)
+		fmt.Println(i)
+		fmt.Println(randomInventory)
 		source := rand.NewSource(time.Now().UnixNano())
 		r := rand.New(source)
 		object := Objects[r.Intn(len(Objects)-1)]
@@ -77,13 +88,16 @@ func inventoryRandomizer(seed int) inventory {
 			itemName = itemName + " and Increasing Quality"
 			randomInventory.SpecialItems = append(randomInventory.SpecialItems, item{Name: itemName, SellBy: 10, Quality: 5})
 		}
-		if itemType < 20 {
+		if itemType <= 20 {
 			itemName = "Conjured " + itemName
 			randomInventory.ConjuredItems = append(randomInventory.ConjuredItems, item{Name: itemName, SellBy: 10, Quality: 20})
-		} else {
+		}
+		if itemType > 20 {
 			itemName = object + " of Somewhat " + adj + " " + attr
 			randomInventory.NormalItems = append(randomInventory.NormalItems, item{Name: itemName, SellBy: 10, Quality: 10})
 		}
 	}
+	fmt.Println(len(randomInventory.NormalItems) + len(randomInventory.EpicItems) + len(randomInventory.SpecialItems) + len(randomInventory.ConjuredItems))
+	fmt.Println(randomInventory)
 	return randomInventory
 }
