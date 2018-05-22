@@ -74,7 +74,7 @@ func inventoryRandomizer(seed int) inventory {
 			randomInventory.EpicItems = append(randomInventory.EpicItems, item{Name: itemName, SellBy: 10, Quality: 80})
 		}
 		if itemType < 5 {
-			itemName = itemName + " of Increasing Quality"
+			itemName = itemName + " and Increasing Quality"
 			randomInventory.SpecialItems = append(randomInventory.SpecialItems, item{Name: itemName, SellBy: 10, Quality: 5})
 		}
 		if itemType < 20 {
