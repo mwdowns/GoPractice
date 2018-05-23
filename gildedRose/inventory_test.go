@@ -53,3 +53,27 @@ func TestDecreaseQuality(t *testing.T) {
 	}
 	fmt.Println("Tests for decreaseQuality function passed")
 }
+
+func TestIncreaseQuality(t *testing.T) {
+	specialI := newItem("Special Item", 10, 10)
+	specialIWithFiveDaysLeft := newItem("Special Item With Five Days Left", 5, 10)
+	specialIWithTwoDaysLeft := newItem("Special Item With Two Days Left", 2, 10)
+	specialIWithNoDaysLeft := newItem("Special Item With No Days Left", 0, 10)
+	specialI.increaseQuality()
+	specialIWithFiveDaysLeft.increaseQuality()
+	specialIWithTwoDaysLeft.increaseQuality()
+	specialIWithNoDaysLeft.increaseQuality()
+	if specialI.Quality != 11 {
+		t.Errorf("Expected Special Item to have quality of 11, but got %v", specialI.Quality)
+	}
+	if specialIWithFiveDaysLeft.Quality != 12 {
+		t.Errorf("Expected Special Item With Five Days Left to have quality of 12, but got %v", specialIWithFiveDaysLeft.Quality)
+	}
+	if specialIWithTwoDaysLeft.Quality != 15 {
+		t.Errorf("Expected Special Item With Two Days Left to have quality of 15, but got %v", specialIWithTwoDaysLeft.Quality)
+	}
+	if specialIWithNoDaysLeft.Quality != 0 {
+		t.Errorf("Expected Special Item With No Days Left to have quality of 0, but got %v", specialIWithNoDaysLeft.Quality)
+	}
+	fmt.Println("Tests for increaseQuality function passed")
+}

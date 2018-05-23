@@ -107,3 +107,16 @@ func (i *item) decreaseQuality(isConjured bool) {
 		i.Quality = i.Quality - 1
 	}
 }
+
+func (i *item) increaseQuality() {
+	i.Quality = i.Quality + 1
+	if i.SellBy < 6 {
+		i.Quality = i.Quality + 1
+	}
+	if i.SellBy < 3 {
+		i.Quality = i.Quality + 3
+	}
+	if i.SellBy == 0 {
+		i.Quality = 0
+	}
+}
