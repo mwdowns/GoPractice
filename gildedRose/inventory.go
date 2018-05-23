@@ -76,6 +76,7 @@ func inventoryRandomizer(num int) inventory {
 		r = rand.New(source)
 		attr := Attributes[r.Intn(len(Attributes)-1)]
 		r = rand.New(source)
+		isCheese := r.Intn(3)
 		itemName := object + " of " + adj + " " + attr
 		r = rand.New(source)
 		itemType := r.Intn(100)
@@ -83,11 +84,12 @@ func inventoryRandomizer(num int) inventory {
 			itemName = object + " of Ultimate " + attr
 			randomInventory.EpicItems = append(randomInventory.EpicItems, item{Name: itemName, SellBy: 10, Quality: 80})
 		} else if itemType < 5 {
-			r = rand.New(source)
-			isCheese := r.Intn(3)
-			if isCheese == 3 {
+			// r = rand.New(source)
+			// isCheese := r.Intn(3)
+			// fmt.Println(isCheese)
+			if isCheese == 2 {
 				r = rand.New(source)
-				cheese := Attributes[r.Intn(len(Cheeses)-1)]
+				cheese := Cheeses[r.Intn(len(Cheeses)-1)]
 				itemName = "Aged " + cheese + " of " + attr
 				randomInventory.SpecialItems = append(randomInventory.SpecialItems, item{Name: itemName, SellBy: 10, Quality: 5})
 			} else {
