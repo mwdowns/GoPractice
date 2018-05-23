@@ -59,10 +59,16 @@ func TestIncreaseQuality(t *testing.T) {
 	specialIWithFiveDaysLeft := newItem("Special Item With Five Days Left", 5, 10)
 	specialIWithTwoDaysLeft := newItem("Special Item With Two Days Left", 2, 10)
 	specialIWithNoDaysLeft := newItem("Special Item With No Days Left", 0, 10)
+	agedBrie := newItem("Aged Brie", 10, 10)
+	agedBrieAtZero := newItem("Aged Brie", 0, 10)
+	agedBriePastSellBy := newItem("Aged Brie", -1, 10)
 	specialI.increaseQuality()
 	specialIWithFiveDaysLeft.increaseQuality()
 	specialIWithTwoDaysLeft.increaseQuality()
 	specialIWithNoDaysLeft.increaseQuality()
+	agedBrie.increaseQuality()
+	agedBrieAtZero.increaseQuality()
+	agedBriePastSellBy.increaseQuality()
 	if specialI.Quality != 11 {
 		t.Errorf("Expected Special Item to have quality of 11, but got %v", specialI.Quality)
 	}
@@ -74,6 +80,15 @@ func TestIncreaseQuality(t *testing.T) {
 	}
 	if specialIWithNoDaysLeft.Quality != 0 {
 		t.Errorf("Expected Special Item With No Days Left to have quality of 0, but got %v", specialIWithNoDaysLeft.Quality)
+	}
+	if agedBrie.Quality != 11 {
+		t.Errorf("Expected Aged Brie to have quality of 11, but got %v", agedBrie.Quality)
+	}
+	if agedBrieAtZero.Quality != 11 {
+		t.Errorf("Expected Aged Brie At Zero to have quality of 11, but got %v", agedBrieAtZero.Quality)
+	}
+	if agedBriePastSellBy.Quality != 11 {
+		t.Errorf("Expected Aged Brie Past SellBy to have quality of 11, but got %v", agedBriePastSellBy.Quality)
 	}
 	fmt.Println("Tests for increaseQuality function passed")
 }

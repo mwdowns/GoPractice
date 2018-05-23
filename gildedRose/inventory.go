@@ -66,6 +66,7 @@ func inventoryRandomizer(num int) inventory {
 	Objects := []string{"Sword", "Potion", "Salve", "Sheild", "Gauntlets", "Boots"}
 	Adjectives := []string{"Awesome", "Good", "Excellent", "Bodacious", "OK", "Fine"}
 	Attributes := []string{"Speed", "Power", "Luck", "Healing", "Invisibility", "Stone", "Fire"}
+	Cheeses := []string{"Brie", "Cheddar", "Gouda"}
 	for i := 0; i < num; i++ {
 		source := rand.NewSource(time.Now().UnixNano())
 		r := rand.New(source)
@@ -82,8 +83,17 @@ func inventoryRandomizer(num int) inventory {
 			itemName = object + " of Ultimate " + attr
 			randomInventory.EpicItems = append(randomInventory.EpicItems, item{Name: itemName, SellBy: 10, Quality: 80})
 		} else if itemType < 5 {
-			itemName = itemName + " and Increasing Quality"
-			randomInventory.SpecialItems = append(randomInventory.SpecialItems, item{Name: itemName, SellBy: 10, Quality: 5})
+			r = rand.New(source)
+			isCheese := r.Intn(3)
+			if isCheese == 3 {
+				r = rand.New(source)
+				cheese := Attributes[r.Intn(len(Cheeses)-1)]
+				itemName = "Aged " + cheese + " of " + attr
+				randomInventory.SpecialItems = append(randomInventory.SpecialItems, item{Name: itemName, SellBy: 10, Quality: 5})
+			} else {
+				itemName = itemName + " and Increasing Quality"
+				randomInventory.SpecialItems = append(randomInventory.SpecialItems, item{Name: itemName, SellBy: 10, Quality: 5})
+			}
 		} else if itemType <= 20 {
 			itemName = "Conjured " + itemName
 			randomInventory.ConjuredItems = append(randomInventory.ConjuredItems, item{Name: itemName, SellBy: 10, Quality: 20})
@@ -93,30 +103,4 @@ func inventoryRandomizer(num int) inventory {
 		}
 	}
 	return randomInventory
-}
-
-func (i *item) anotherDayCloserToDeath() {
-	i.SellBy = i.SellBy - 1
-}
-
-func (i *item) decreaseQuality(isConjured bool) {
-	if isConjured == true {
-		i.Quality = i.Quality - 2
-
-	} else {
-		i.Quality = i.Quality - 1
-	}
-}
-
-func (i *item) increaseQuality() {
-	i.Quality = i.Quality + 1
-	if i.SellBy < 6 {
-		i.Quality = i.Quality + 1
-	}
-	if i.SellBy < 3 {
-		i.Quality = i.Quality + 3
-	}
-	if i.SellBy == 0 {
-		i.Quality = 0
-	}
 }
