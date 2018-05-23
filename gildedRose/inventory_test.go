@@ -24,7 +24,7 @@ func TestNewInventory(t *testing.T) {
 
 func TestInventoryRandomizer(t *testing.T) {
 	i := inventoryRandomizer(15)
-	itemCount := len(i.EpicItems) + len(i.SpecialItems) + len(i.ConjuredItems) + len(i.NormalItems)
+	itemCount := len(i.EpicItems) + len(i.SpecialItems) + len(i.IonizedItems) + len(i.NormalItems)
 	if itemCount != 15 {
 		t.Errorf("Expected 15 items in inventory, but got %v", itemCount)
 	}
@@ -42,11 +42,11 @@ func TestAnotherDayCloserToDeath(t *testing.T) {
 
 func TestDecreaseQuality(t *testing.T) {
 	normalI := newItem("Normal Item", 10, 10)
-	conjuredI := newItem("Conjured Item", 10, 10)
+	ionizedI := newItem("Ionized Item", 10, 10)
 	normalI.decreaseQuality(false)
-	conjuredI.decreaseQuality(true)
-	if conjuredI.Quality != 8 {
-		t.Errorf("Expected Conjured Item to have quality of 8, but got %v", conjuredI.Quality)
+	ionizedI.decreaseQuality(true)
+	if ionizedI.Quality != 8 {
+		t.Errorf("Expected Ionized Item to have quality of 8, but got %v", ionizedI.Quality)
 	}
 	if normalI.Quality != 9 {
 		t.Errorf("Expected Normal Item to have quality of 9, but got %v", normalI.Quality)

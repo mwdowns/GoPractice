@@ -13,10 +13,10 @@ type item struct {
 }
 
 type inventory struct {
-	EpicItems     []item
-	SpecialItems  []item
-	ConjuredItems []item
-	NormalItems   []item
+	EpicItems    []item
+	SpecialItems []item
+	IonizedItems []item
+	NormalItems  []item
 }
 
 func newItem(name string, sellby int, quality int) item {
@@ -38,10 +38,10 @@ func (i inventory) printInventory() {
 	} else {
 		fmt.Printf("Special Items: %v\n", i.SpecialItems)
 	}
-	if len(i.ConjuredItems) == 0 {
-		fmt.Println("There are no Conjured Items. Try back later.")
+	if len(i.IonizedItems) == 0 {
+		fmt.Println("There are no Ionized Items. Try back later.")
 	} else {
-		fmt.Printf("Conjured Items: %v\n", i.ConjuredItems)
+		fmt.Printf("Ionized Items: %v\n", i.IonizedItems)
 	}
 	if len(i.NormalItems) == 0 {
 		fmt.Println("There are no Normal Items. Try back later.")
@@ -51,7 +51,7 @@ func (i inventory) printInventory() {
 }
 
 func (i inventory) countInventory() {
-	ic := len(i.EpicItems) + len(i.SpecialItems) + len(i.ConjuredItems) + len(i.NormalItems)
+	ic := len(i.EpicItems) + len(i.SpecialItems) + len(i.IonizedItems) + len(i.NormalItems)
 	fmt.Printf("There are %v items in the shop!\n", ic)
 }
 
@@ -61,11 +61,31 @@ func (i item) printItem() {
 	fmt.Printf("Quality: %v\n", i.Quality)
 }
 
+func (p player) createPlayerInventory() {
+	food := newItem("Space Food of Speedy Recovery", 20, 10)
+	blaster := newItem("Plasma Blaster of Pretty Good Stats", 1000, 10)
+	hat := newItem("Fighter Helmet of Thick Headedness", 1000, 10)
+	cheese := newItem("Good Aged Gouda", 10, 5)
+	p.Inventory = inventory{
+		EpicItems: []item{},
+		SpecialItems: []item{
+			cheese,
+		},
+		IonizedItems: []item{},
+		NormalItems: []item{
+			food,
+			blaster,
+			hat,
+		},
+	}
+
+}
+
 func inventoryRandomizer(num int) inventory {
 	randomInventory := inventory{}
-	Objects := []string{"Sword", "Potion", "Salve", "Sheild", "Gauntlets", "Boots"}
+	Objects := []string{"Blaster", "Med-Pack", "Nano-Injector", "Force-sheild", "Gloves", "Boots"}
 	Adjectives := []string{"Awesome", "Good", "Excellent", "Bodacious", "OK", "Fine"}
-	Attributes := []string{"Speed", "Power", "Luck", "Healing", "Invisibility", "Stone", "Fire"}
+	Attributes := []string{"Velocity", "Energy", "Kismet", "Recovery", "Cloaking", "Titanium", "Plasma"}
 	Cheeses := []string{"Brie", "Cheddar", "Gouda"}
 	for i := 0; i < num; i++ {
 		source := rand.NewSource(time.Now().UnixNano())
@@ -77,6 +97,9 @@ func inventoryRandomizer(num int) inventory {
 		attr := Attributes[r.Intn(len(Attributes)-1)]
 		r = rand.New(source)
 		isCheese := r.Intn(3)
+		r = rand.New(source)
+		cheese := Cheeses[r.Intn(len(Cheeses)-1)]
+		cheeseName := "Aged " + cheese + " of " + attr
 		itemName := object + " of " + adj + " " + attr
 		r = rand.New(source)
 		itemType := r.Intn(100)
@@ -84,21 +107,15 @@ func inventoryRandomizer(num int) inventory {
 			itemName = object + " of Ultimate " + attr
 			randomInventory.EpicItems = append(randomInventory.EpicItems, item{Name: itemName, SellBy: 10, Quality: 80})
 		} else if itemType < 5 {
-			// r = rand.New(source)
-			// isCheese := r.Intn(3)
-			// fmt.Println(isCheese)
 			if isCheese == 2 {
-				r = rand.New(source)
-				cheese := Cheeses[r.Intn(len(Cheeses)-1)]
-				itemName = "Aged " + cheese + " of " + attr
-				randomInventory.SpecialItems = append(randomInventory.SpecialItems, item{Name: itemName, SellBy: 10, Quality: 5})
+				randomInventory.SpecialItems = append(randomInventory.SpecialItems, item{Name: cheeseName, SellBy: 10, Quality: 5})
 			} else {
 				itemName = itemName + " and Increasing Quality"
 				randomInventory.SpecialItems = append(randomInventory.SpecialItems, item{Name: itemName, SellBy: 10, Quality: 5})
 			}
 		} else if itemType <= 20 {
-			itemName = "Conjured " + itemName
-			randomInventory.ConjuredItems = append(randomInventory.ConjuredItems, item{Name: itemName, SellBy: 10, Quality: 20})
+			itemName = "Ionized " + itemName
+			randomInventory.IonizedItems = append(randomInventory.IonizedItems, item{Name: itemName, SellBy: 10, Quality: 20})
 		} else {
 			itemName = object + " of Somewhat " + adj + " " + attr
 			randomInventory.NormalItems = append(randomInventory.NormalItems, item{Name: itemName, SellBy: 10, Quality: 10})

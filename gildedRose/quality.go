@@ -4,8 +4,8 @@ import (
 	"strings"
 )
 
-func (i *item) decreaseQuality(isConjured bool) {
-	if isConjured == true {
+func (i *item) decreaseQuality(isIonized bool) {
+	if isIonized == true {
 		i.Quality = i.Quality - 2
 
 	} else {
