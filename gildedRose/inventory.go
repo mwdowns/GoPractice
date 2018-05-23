@@ -98,3 +98,12 @@ func inventoryRandomizer(num int) inventory {
 func (i *item) anotherDayCloserToDeath() {
 	i.SellBy = i.SellBy - 1
 }
+
+func (i *item) decreaseQuality(isConjured bool) {
+	if isConjured == true {
+		i.Quality = i.Quality - 2
+
+	} else {
+		i.Quality = i.Quality - 1
+	}
+}
