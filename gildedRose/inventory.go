@@ -94,3 +94,7 @@ func inventoryRandomizer(num int) inventory {
 	}
 	return randomInventory
 }
+
+func (i *item) anotherDayCloserToDeath() {
+	i.SellBy = i.SellBy - 1
+}
