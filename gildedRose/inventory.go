@@ -61,26 +61,6 @@ func (i item) printItem() {
 	fmt.Printf("Quality: %v\n", i.Quality)
 }
 
-func (p player) createPlayerInventory() {
-	food := newItem("Space Food of Speedy Recovery", 20, 10)
-	blaster := newItem("Plasma Blaster of Pretty Good Stats", 1000, 10)
-	hat := newItem("Fighter Helmet of Thick Headedness", 1000, 10)
-	cheese := newItem("Good Aged Gouda", 10, 5)
-	p.Inventory = inventory{
-		EpicItems: []item{},
-		SpecialItems: []item{
-			cheese,
-		},
-		IonizedItems: []item{},
-		NormalItems: []item{
-			food,
-			blaster,
-			hat,
-		},
-	}
-
-}
-
 func inventoryRandomizer(num int) inventory {
 	randomInventory := inventory{}
 	Objects := []string{"Blaster", "Med-Pack", "Nano-Injector", "Force-sheild", "Gloves", "Boots"}

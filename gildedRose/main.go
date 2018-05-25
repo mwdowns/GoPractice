@@ -35,6 +35,7 @@ func startGame() {
 		fmt.Println("OK. See you later")
 	} else {
 		fmt.Println("Please choose y or n")
+		fmt.Println("Would you like to create a player? (y/n)")
 		startGame()
 	}
 }
