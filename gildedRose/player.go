@@ -20,19 +20,20 @@ type stats struct {
 	Dex int
 }
 
-func createNewPlayer() *player {
-	var name string
-	var class string
-	fmt.Println("What name would you like to give your player? ")
-	fmt.Scanln("%s", &name)
-	fmt.Println("What class would you like to give your player? (for a list of classes, type 'help')")
-	fmt.Scanln("%s", &class)
-	if class == "help" {
-		fmt.Println("Scoundrel - Engineer - Captain")
-		fmt.Println("Which class would you like to play? ")
-		fmt.Scanln("%s", &class)
-	}
-	fmt.Println("Great! You're ready to start your adventure!")
+// func createNewPlayer() *player {
+func createNewPlayer(name string, class string) *player {
+	// var name string
+	// var class string
+	// fmt.Println("What name would you like to give your player? ")
+	// fmt.Scanln("%s", &name)
+	// fmt.Println("What class would you like to give your player? (for a list of classes, type 'help')")
+	// fmt.Scanln("%s", &class)
+	// if class == "help" {
+	// 	fmt.Println("Scoundrel - Engineer - Captain")
+	// 	fmt.Println("Which class would you like to play? ")
+	// 	fmt.Scanln("%s", &class)
+	// }
+	// fmt.Println("Great! You're ready to start your adventure!")
 	p := &player{
 		Name:  name,
 		Class: class,

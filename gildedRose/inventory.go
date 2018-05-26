@@ -23,6 +23,12 @@ func newItem(name string, sellby int, quality int) item {
 	return item{Name: name, SellBy: sellby, Quality: quality}
 }
 
+func (i item) printItem() {
+	fmt.Printf("Name: %v\n", i.Name)
+	fmt.Printf("Sell in %v days.\n", i.SellBy)
+	fmt.Printf("Quality: %v\n", i.Quality)
+}
+
 func newInventory() inventory {
 	return inventory{}
 }
@@ -53,12 +59,6 @@ func (i inventory) printInventory() {
 func (i inventory) countInventory() {
 	ic := len(i.EpicItems) + len(i.SpecialItems) + len(i.IonizedItems) + len(i.NormalItems)
 	fmt.Printf("There are %v items in the shop!\n", ic)
-}
-
-func (i item) printItem() {
-	fmt.Printf("Name: %v\n", i.Name)
-	fmt.Printf("Sell in %v days.\n", i.SellBy)
-	fmt.Printf("Quality: %v\n", i.Quality)
 }
 
 func inventoryRandomizer(num int) inventory {

@@ -29,7 +29,8 @@ func startGame() {
 	fmt.Scanf("%s", &answer)
 	if answer == "y" {
 		fmt.Println("Great")
-		p := createNewPlayer()
+		// p := createNewPlayer()
+		p := createNewPlayerDialogue()
 		p.printPlayer()
 	} else if answer == "n" {
 		fmt.Println("OK. See you later")
@@ -38,4 +39,20 @@ func startGame() {
 		fmt.Println("Would you like to create a player? (y/n)")
 		startGame()
 	}
+}
+
+func createNewPlayerDialogue() *player {
+	var name string
+	var class string
+	fmt.Println("What name would you like to give your player? ")
+	fmt.Scanln("%s", &name)
+	fmt.Println("What class would you like to give your player? (for a list of classes, type 'help')")
+	fmt.Scanln("%s", &class)
+	if class == "help" {
+		fmt.Println("Scoundrel - Engineer - Captain")
+		fmt.Println("Which class would you like to play? ")
+		fmt.Scanln("%s", &class)
+	}
+	fmt.Println("Great! You're ready to start your adventure!")
+	return createNewPlayer(name, class)
 }
