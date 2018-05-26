@@ -20,7 +20,7 @@ type stats struct {
 	Dex int
 }
 
-func createNewPlayer() player {
+func createNewPlayer() *player {
 	var name string
 	var class string
 	fmt.Println("What name would you like to give your player? ")
@@ -33,7 +33,7 @@ func createNewPlayer() player {
 		fmt.Scanln("%s", &class)
 	}
 	fmt.Println("Great! You're ready to start your adventure!")
-	p := player{
+	p := &player{
 		Name:  name,
 		Class: class,
 		Stats: stats{
@@ -52,7 +52,7 @@ func createNewPlayer() player {
 	return p
 }
 
-func (p player) printPlayer() {
+func (p *player) printPlayer() {
 	fmt.Printf("Your player's name is %v", p.Name)
 	fmt.Printf("They are a %v class.", p.Class)
 	fmt.Printf("Their maing weapon is a %v", p.Weapon.Name)
@@ -64,7 +64,7 @@ func (p player) printPlayer() {
 	fmt.Printf("They have on special item %v", p.Inventory.IonizedItems[0].Name)
 }
 
-func (p player) createPlayerInventory() {
+func (p *player) createPlayerInventory() {
 	food := newItem("Space Food of Speedy Recovery", 20, 10)
 	blaster := newItem("Plasma Blaster of Pretty Good Stats", 1000, 10)
 	hat := newItem("Fighter Helmet of Thick Headedness", 1000, 10)
