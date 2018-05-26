@@ -53,15 +53,15 @@ func createNewPlayer() *player {
 }
 
 func (p *player) printPlayer() {
-	fmt.Printf("Your player's name is %v", p.Name)
-	fmt.Printf("They are a %v class.", p.Class)
-	fmt.Printf("Their maing weapon is a %v", p.Weapon.Name)
-	fmt.Printf("They are wearing a %v", p.Armor.Name)
+	fmt.Printf("Your player's name is %v.\n", p.Name)
+	fmt.Printf("They are a %v class.\n", p.Class)
+	fmt.Printf("Their maing weapon is a %v.\n", p.Weapon.Name)
+	fmt.Printf("They are wearing a %v.\n", p.Armor.Name)
 	fmt.Println("Their inventory consists of these items:")
 	for _, i := range p.Inventory.NormalItems {
 		fmt.Println(i.Name)
 	}
-	fmt.Printf("They have on special item %v", p.Inventory.IonizedItems[0].Name)
+	fmt.Printf("They have on special item %v", p.Inventory.SpecialItems[0].Name)
 }
 
 func (p *player) createPlayerInventory() {
