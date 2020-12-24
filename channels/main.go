@@ -13,6 +13,7 @@ func main() {
 		"http://facebook.com",
 		"http://github.com",
 		"http://golang.org",
+		"http://groundfloor.us",
 	}
 
 	c := make(chan string)
@@ -22,9 +23,9 @@ func main() {
 	}
 
 	for l := range c {
-		go func(link string) {
+		go func(anon_link string) {
 			time.Sleep(5 * time.Second)
-			linkChecker(link, c)
+			linkChecker(anon_link, c)
 		}(l)
 	}
 }
