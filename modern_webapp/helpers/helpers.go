@@ -1,5 +1,10 @@
 package helpers
 
+import (
+	"math/rand"
+	"time"
+)
+
 type Animal interface {
 	SayName() string
 	Says() string
@@ -8,9 +13,9 @@ type Animal interface {
 
 type Pet struct {
 	Type string `json:"type"`
-	Name string
-	Word string
-	Legs int
+	Name string `json:"name"`
+	Word string `json:"word"`
+	Legs int    `json:"legs"`
 }
 
 func (p *Pet) SayName() string {
@@ -23,4 +28,10 @@ func (p *Pet) Says() string {
 
 func (p *Pet) NumberOfLegs() int {
 	return p.Legs
+}
+
+func GenerateRandomNumber(n int) int {
+	rand.Seed(time.Now().UnixNano())
+	value := rand.Intn(n)
+	return value
 }
