@@ -1,25 +1,22 @@
 package main
 
 import (
-	"log"
+	"fmt"
+
+	"github.com/mwdowns/GoPractice/modern_webapp/my_packages/helpers"
 )
 
-type myVar struct {
-	Blah string
+func main() {
+	var housePets []helpers.Pet
+	housePets = append(housePets, helpers.Pet{Type: "dog", Name: "Danny", Word: "Buscuits?", Legs: 4})
+	housePets = append(housePets, helpers.Pet{Type: "dog", Name: "Rovi", Word: "Huh?", Legs: 4})
+	housePets = append(housePets, helpers.Pet{Type: "cat", Name: "Stinkins", Word: "Lovins?", Legs: 4})
+	housePets = append(housePets, helpers.Pet{Type: "cat", Name: "Doodins", Word: "Fancy Feast?", Legs: 4})
+	for _, pet := range housePets {
+		PrintPetInfo(&pet)
+	}
 }
 
-func main() {
-	myMap := make(map[string]myVar)
-	mySlice := []myVar{}
-
-
-	blah := myVar{Blah: "blah",}
-	bla2 := myVar{Blah: "blah2",}
-
-	myMap["dog"] = blah
-	mySlice = append(mySlice, blah)
-	mySlice = append(mySlice, bla2)
-
-	log.Println(myMap["dog"].Blah)
-	log.Println(mySlice[0].Blah, mySlice[1].Blah)
+func PrintPetInfo(a helpers.Animal) {
+	fmt.Println(a.SayName(), "says", a.Says(), "and has", a.NumberOfLegs(), "legs.")
 }
