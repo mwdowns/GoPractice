@@ -5,8 +5,8 @@ import (
 	"log"
 	"modern_webapp/webapp/pkg/config"
 	"modern_webapp/webapp/pkg/constants"
+	"modern_webapp/webapp/pkg/handlers"
 	"modern_webapp/webapp/pkg/render"
-	"modern_webapp/webapp/pkg/routes"
 	"net/http"
 )
 
@@ -19,11 +19,15 @@ func main() {
 		log.Fatal("could not create template cache")
 	}
 	app.TemplateCache = tc
+	app.UseCache = false
+
+	repo := handlers.NewRepo(&app)
+	handlers.NewHandlers(repo)
 
 	render.NewTemplates(&app)
 
-	http.HandleFunc("/", routes.Home)
-	http.HandleFunc("/about", routes.About)
+	http.HandleFunc("/", handlers.Repo.Home)
+	http.HandleFunc("/about", handlers.Repo.About)
 
 	fmt.Println("listing on port", constants.PortNumber)
 	http.ListenAndServe(constants.PortNumber, nil)
