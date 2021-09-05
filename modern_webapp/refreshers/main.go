@@ -3,8 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-
-	"github.com/mwdowns/GoPractice/modern_webapp/my_packages/helpers"
+	"modern_webapp/refreshers/helpers"
 )
 
 const Num = 10

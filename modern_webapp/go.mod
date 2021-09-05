@@ -1,3 +1,3 @@
-module github.com/mwdowns/GoPractice/modern_webapp/my_packages
+module modern_webapp
 
 go 1.17
